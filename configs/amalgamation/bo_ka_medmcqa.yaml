@@ -1,0 +1,26 @@
+config:
+  max_length: 1024
+  tokenizer_type: microsoft/biogpt
+  matching_type: BioGptForSequenceClassification
+  nb_epochs: 5
+  train_batch_size: 7
+  eval_batch_size: 7
+  weight_decay: 0.01
+  lr: 2e-5
+  loss: CrossEntropyLoss
+  early_stopping: 10
+  knowledge_type: averaged
+
+student_model:
+  model_type_or_dir: microsoft/biogpt
+  num_labels: 4
+  checkpoint_dir: student_models/medmcqa_biogpt/ka/teacher_
+  checkpoint_restore: null
+
+
+data:
+  type: MedMCQA
+  train_files:
+    - /home/datasets/MedMCQA/student_train.json
+  test_files:
+    - /home/datasets/MedMCQA/dev.json

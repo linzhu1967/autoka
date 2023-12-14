@@ -1,0 +1,27 @@
+config:
+  max_length: 1024
+  tokenizer_type: microsoft/biogpt
+  matching_type: BioGptForSequenceClassification
+  nb_epochs: 5
+  train_batch_size: 7
+  eval_batch_size: 7
+  weight_decay: 0.01
+  lr: 2e-5
+  loss: CrossEntropyLoss
+  early_stopping: 10
+  knowledge_type: averaged
+
+student_model:
+  model_type_or_dir: microsoft/biogpt
+  num_labels: 3
+  checkpoint_dir: student_models/pubmedqa_biogpt/ka/teacher_
+  checkpoint_restore: null
+
+
+data:
+  type: PubMedQA
+  train_files_validation_files:
+    - /home/datasets/PubMedQA/pqau.jsonl
+    - /home/datasets/PubMedQA/pqal_dev.jsonl
+  test_files:
+    - /home/datasets/PubMedQA/pqal_test.jsonl
